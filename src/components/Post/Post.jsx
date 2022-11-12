@@ -6,20 +6,20 @@ const Post = ({ number, children }) => {
   const createdAt = new Date(time * 1000).toLocaleString().slice(0, 17);
   return (
     <div className={styles.wrap}>
-      <div className={styles.post}>
+      <article className={styles.post}>
         <p className={styles.number}>
           <GradientText>{number}</GradientText>
         </p>
-        <header className={styles.header}>
-          <h2 className={styles.title}>
-            <GradientText>{title}</GradientText>
-          </h2>
+        <section className={styles.content}>
+          <h2 className={styles.text}>{title}</h2>
           <div className={styles.info}>
-            Posted by <GradientText>{by} </GradientText>
-            at {createdAt}
+            <p className={styles.text}>
+              Posted by <strong>{by} </strong>
+              at {createdAt}
+            </p>
           </div>
-        </header>
-      </div>
+        </section>
+      </article>
     </div>
   );
 };

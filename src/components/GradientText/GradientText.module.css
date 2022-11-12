@@ -1,0 +1,18 @@
+.gradient {
+  background: -webkit-linear-gradient(
+    180deg,
+    #f72585ff,
+    #b5179eff,
+    #7209b7ff,
+    #560badff,
+    #480ca8ff,
+    #3a0ca3ff,
+    #3f37c9ff,
+    #4361eeff,
+    #4895efff,
+    #4cc9f0ff
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

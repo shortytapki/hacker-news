@@ -1,0 +1,62 @@
+.post {
+  border-radius: 0.3rem;
+  padding: 2rem;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  color: #e5e5e5;
+  width: 100%;
+  background-color: #000;
+  height: 100%;
+  position: relative;
+}
+
+.post,
+.wrap {
+  transition: all 0.3s ease;
+}
+.header {
+  margin-bottom: 2rem;
+  z-index: 999;
+}
+
+.info {
+  font-size: 1.2rem;
+  margin-top: 1.6rem;
+  z-index: 999;
+}
+
+.wrap {
+  min-height: 3rem;
+  border-radius: 0.5rem;
+  background: -webkit-linear-gradient(
+    180deg,
+    #f72585ff,
+    #b5179eff,
+    #7209b7ff,
+    #560badff,
+    #480ca8ff,
+    #3a0ca3ff,
+    #3f37c9ff,
+    #4361eeff,
+    #4895efff,
+    #4cc9f0ff
+  );
+  padding: 0.5rem;
+}
+.wrap:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.wrap:active {
+  transform: scale(1.03);
+}
+
+.number {
+  position: absolute;
+  font-size: 6.5rem;
+  right: 1rem;
+  bottom: -1rem;
+  opacity: 0.3;
+  z-index: 1;
+}

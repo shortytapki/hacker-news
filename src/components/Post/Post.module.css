@@ -44,33 +44,6 @@
   z-index: 999;
 }
 
-.wrap {
-  min-height: 3rem;
-  border-radius: 0.5rem;
-  background: -webkit-linear-gradient(
-    180deg,
-    #f72585ff,
-    #b5179eff,
-    #7209b7ff,
-    #560badff,
-    #480ca8ff,
-    #3a0ca3ff,
-    #3f37c9ff,
-    #4361eeff,
-    #4895efff,
-    #4cc9f0ff
-  );
-  padding: 0.5rem;
-}
-.wrap:hover {
-  transform: scale(1.05);
-  cursor: pointer;
-}
-
-.wrap:active {
-  transform: scale(1.03);
-}
-
 .number {
   position: absolute;
   font-size: 6.5rem;
@@ -78,4 +51,8 @@
   bottom: -1rem;
   opacity: 0.6;
   z-index: 1;
+}
+
+.score {
+  font-size: 2rem;
 }

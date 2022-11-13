@@ -3,9 +3,11 @@ import styles from './Loading.module.css';
 
 const Loading = () => {
   return (
-    <p className={styles.msg}>
-      <GradientText>Loading posts...</GradientText>
-    </p>
+    <div className={styles.container}>
+      <p className={styles.msg}>
+        <GradientText>Loading posts...</GradientText>
+      </p>
+    </div>
   );
 };
 

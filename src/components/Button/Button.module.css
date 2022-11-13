@@ -7,43 +7,5 @@
   border: none;
   background: #000;
   border-radius: 0.3rem;
-  /* background-clip: text;
-  background: -webkit-linear-gradient(180deg, #4361eeff, #4895efff, #4cc9f0ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; */
-}
-
-.wrap,
-.button {
   transition: all 0.3s ease;
-}
-.wrap {
-  border-radius: 0.5rem;
-  background: -webkit-linear-gradient(
-    180deg,
-    #f72585ff,
-    #b5179eff,
-    #7209b7ff,
-    #560badff,
-    #480ca8ff,
-    #3a0ca3ff,
-    #3f37c9ff,
-    #4361eeff,
-    #4895efff,
-    #4cc9f0ff
-  );
-  padding: 3px;
-  width: 9rem;
-}
-.wrap:hover {
-  transform: scale(1.15);
-  cursor: pointer;
-}
-
-.button:hover {
-  cursor: pointer;
-}
-
-.wrap:active {
-  transform: scale(1.05);
 }

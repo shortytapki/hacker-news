@@ -15,6 +15,25 @@
   animation: showHeader 0.6s ease;
 }
 
+.button {
+  text-transform: uppercase;
+  height: 3.5rem;
+  width: 100%;
+  font-size: 1.2rem;
+  color: #ccc;
+  border: none;
+  background: #000;
+  border-radius: 0.3rem;
+}
+
+.button {
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
 @keyframes showHeader {
   from {
     transform: translateY(-100%);

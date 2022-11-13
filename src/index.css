@@ -23,3 +23,32 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.wrap {
+  min-height: 3rem;
+  transition: all 0.3s ease;
+  border-radius: 0.5rem;
+  background: -webkit-linear-gradient(
+    180deg,
+    #f72585ff,
+    #b5179eff,
+    #7209b7ff,
+    #560badff,
+    #480ca8ff,
+    #3a0ca3ff,
+    #3f37c9ff,
+    #4361eeff,
+    #4895efff,
+    #4cc9f0ff
+  );
+  padding: 0.5rem;
+}
+
+.wrap:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.wrap:active {
+  transform: scale(1.03);
+}

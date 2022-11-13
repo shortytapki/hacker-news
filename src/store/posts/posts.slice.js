@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = [];
 export const postsSlice = createSlice({
   name: 'posts',
-  initialState,
+  initialState: {
+    posts: [],
+  },
   reducers: {
     loadPosts: (state, action) => {},
   },

@@ -52,3 +52,7 @@ body {
 .wrap:active {
   transform: scale(1.03);
 }
+
+.view {
+  padding: 3rem;
+}

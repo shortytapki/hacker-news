@@ -67,3 +67,9 @@
   gap: 2rem;
   margin: 3rem;
 }
+
+.refresh {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

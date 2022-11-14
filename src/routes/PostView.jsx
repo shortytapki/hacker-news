@@ -5,8 +5,15 @@ import styles from './PostView.module.css';
 import GradientText from '../components/GradientText/GradientText';
 import { useGetCommentsQuery, useGetPostQuery } from '../store/posts/posts.api';
 import RootComment from '../components/RootComment/RootComment';
+import Button from '../components/Button/Button';
 
 const PostView = () => {
+  let history = useHistory();
+
+  const returnHandler = () => {
+    history.push('/');
+  };
+  // const { id } = useParams();
   const {
     data: postData,
     isLoading: postIsLoading,
@@ -18,13 +25,8 @@ const PostView = () => {
     isLoading: commentsAreLoading,
     isFetching: commentsAreFetching,
     isError: commentsLoadError,
+    refetch,
   } = useGetCommentsQuery('8863');
-  let history = useHistory();
-  // const { id } = useParams();
-
-  const returnHandler = () => {
-    history.push('/');
-  };
 
   const post = !postIsLoading && !postIsFetching && !postLoadError && postData;
   const commentsLoaded =
@@ -40,7 +42,9 @@ const PostView = () => {
 
   return (
     <>
-      <Header handler={returnHandler} />
+      <Header>
+        <Button handler={returnHandler}>Go home</Button>
+      </Header>
       <div className={styles.view}>
         <div className="viewwrap">
           <article className={styles.article}>
@@ -55,11 +59,14 @@ const PostView = () => {
                 >
                   Go to the original post
                 </a>
-                <p>
-                  {commentsCount
-                    ? `Main comments: ${commentsCount}`
-                    : 'No comments yet... (-_-メ)'}
-                </p>
+                <div className={styles.refresh}>
+                  <p>
+                    {commentsCount
+                      ? `Main comments: ${commentsCount}`
+                      : 'No comments yet... (-_-メ)'}
+                  </p>
+                  <Button handler={refetch}>Refresh comments</Button>
+                </div>
               </div>
               <aside className={styles.author}>
                 <p>

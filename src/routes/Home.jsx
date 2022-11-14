@@ -6,6 +6,7 @@ import { useGetLatestPostsQuery } from '../store/posts/posts.api';
 import { Link } from 'react-router-dom';
 import { useActions } from '../hooks/useActions';
 import { useEffect } from 'react';
+import Button from '../components/Button/Button';
 
 const MINUTE = 10000;
 
@@ -24,7 +25,9 @@ const Home = () => {
 
   return (
     <>
-      <Header page={'home'} handler={refetch} />
+      <Header>
+        <Button handler={refetch}>Refresh news</Button>
+      </Header>
       {!isFetching && !isLoading && !isError && data ? (
         <>
           {

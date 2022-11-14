@@ -1,11 +1,11 @@
 import GradientText from '../GradientText/GradientText';
 import styles from './Button.module.css';
 
-const Button = ({ page, handler }) => {
+const Button = ({ handler, children }) => {
   return (
     <div className={styles.buttonwrap}>
       <button className={styles.button} onClick={() => handler()}>
-        <GradientText>{page === 'home' ? 'refresh' : 'go home'}</GradientText>
+        <GradientText>{children}</GradientText>
       </button>
     </div>
   );

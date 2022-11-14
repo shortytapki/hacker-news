@@ -24,8 +24,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.wrap {
-  min-height: 3rem;
+a {
+  text-decoration: none;
+  height: auto;
+  display: block;
+}
+
+.wrap,
+.viewwrap {
+  height: 100%;
   transition: all 0.3s ease;
   border-radius: 0.5rem;
   background: -webkit-linear-gradient(
@@ -41,11 +48,11 @@ body {
     #4895efff,
     #4cc9f0ff
   );
-  padding: 0.5rem;
+  padding: 0.3rem;
 }
 
 .wrap:hover {
-  transform: scale(1.05);
+  transform: scale(1.07);
   cursor: pointer;
 }
 

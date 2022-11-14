@@ -10,6 +10,9 @@ export const postsApi = createApi({
     getLatestPosts: build.query({
       query: () => 'api/latest',
     }),
+    getPost: build.query({
+      query: (id) => `api/post/${id}`,
+    }),
   }),
 });
 

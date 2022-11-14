@@ -51,8 +51,21 @@
   bottom: -1rem;
   opacity: 0.6;
   z-index: 1;
+  background: -webkit-linear-gradient(
+    180deg,
+    #f72585ff,
+    #b5179eff,
+    #7209b7ff,
+    #560badff,
+    #480ca8ff
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .score {
   font-size: 2rem;
 }
+
+

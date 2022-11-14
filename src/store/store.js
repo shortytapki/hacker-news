@@ -1,11 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import { postsApi } from './posts/posts.api';
-import { updateReducer } from './posts/posts.slice';
+import viewReducer from './posts/posts.slice';
 
 const rootReducer = combineReducers({
   [postsApi.reducerPath]: postsApi.reducer,
-  update: updateReducer,
+  views: viewReducer,
 });
 export const store = configureStore({
   reducer: rootReducer,

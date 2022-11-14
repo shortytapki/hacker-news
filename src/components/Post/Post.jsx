@@ -1,4 +1,3 @@
-import GradientText from '../GradientText/GradientText';
 import styles from './Post.module.css';
 
 const Post = ({ number, children }) => {
@@ -7,9 +6,7 @@ const Post = ({ number, children }) => {
   return (
     <div className="wrap">
       <article className={styles.post}>
-        <p className={styles.number}>
-          <GradientText>{number}</GradientText>
-        </p>
+        <p className={styles.number}>{number}</p>
         <section className={styles.content}>
           <h2 className={styles.text}>{title}</h2>
           <div className={styles.info}>

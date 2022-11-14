@@ -1,14 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const postsSlice = createSlice({
-  name: 'posts',
-  initialState: {
-    posts: [],
-  },
+const initialState = { posts: [] };
+
+const viewsSlice = createSlice({
+  name: 'views',
+  initialState,
   reducers: {
-    loadPosts: (state, action) => {},
+    putNew(state, action) {
+      state.posts = action.payload;
+    },
   },
 });
 
-export const updateReducer = postsSlice.reducer;
-export const postsActions = postsSlice.actions;
+export const postActions = viewsSlice.actions;
+export default viewsSlice.reducer;

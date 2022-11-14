@@ -1,3 +1,32 @@
+.buttonwrap {
+  min-height: 3rem;
+  transition: all 0.3s ease;
+  border-radius: 0.5rem;
+  background: -webkit-linear-gradient(
+    180deg,
+    #f72585ff,
+    #b5179eff,
+    #7209b7ff,
+    #560badff,
+    #480ca8ff,
+    #3a0ca3ff,
+    #3f37c9ff,
+    #4361eeff,
+    #4895efff,
+    #4cc9f0ff
+  );
+  padding: 0.3rem;
+}
+
+.buttonwrap:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.buttonwrap:active {
+  transform: scale(1.03);
+}
+
 .button {
   text-transform: uppercase;
   height: 3.5rem;
@@ -8,4 +37,12 @@
   background: #000;
   border-radius: 0.3rem;
   transition: all 0.3s ease;
+  padding: 0 2rem;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+@keyframes showbutton {
 }

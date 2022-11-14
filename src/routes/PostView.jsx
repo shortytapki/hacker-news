@@ -23,22 +23,24 @@ const PostView = () => {
     isError: commentsLoadError,
     refetch,
   } = useGetCommentsQuery('8863');
+
+  const refresh = commentsAreFetching || commentsAreLoading;
   const commentsLoaded =
     !commentsAreFetching && !commentsAreLoading && !commentsLoadError;
-  let rootComments = commentsLoaded && data;
 
   useEffect(() => {
     if (commentsLoaded) {
-      putNewComments(rootComments);
+      putNewComments(data);
     }
-  }, [data]);
+  }, [commentsLoaded]);
 
   let firstLvlComments = useSelector((state) => state.views.rootComments);
 
   const post = useSelector((state) => state.views.posts)
     .filter((data) => +id === data.id)
     .at(0);
-  const { url, title, time, by: author } = post;
+  const { url, title, time, by: author, kids } = post;
+  const noComments = !kids;
 
   return (
     <>
@@ -74,17 +76,16 @@ const PostView = () => {
               </aside>
             </header>
             <section className={styles.comments}>
-              {(commentsAreLoading || commentsAreFetching) && firstLvlComments
-                ? 'Loading comments'
-                : 'No comments yet... (-_-メ)'}
-              {firstLvlComments.length !== 0 &&
-                firstLvlComments.map(
-                  (comment) =>
-                    comment !== null &&
-                    !comment.msg && (
-                      <Comment key={comment.time} comment={comment} />
-                    )
-                )}
+              <span>
+                {noComments && !refresh && 'No comments yet... (-_-メ)'}
+              </span>
+              <p>{refresh && 'Refreshing comments...'}</p>
+              {firstLvlComments.map(
+                (comment) =>
+                  !comment.msg && (
+                    <Comment key={comment.time} comment={comment} />
+                  )
+              )}
             </section>
           </article>
         </div>

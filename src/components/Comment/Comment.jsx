@@ -1,40 +1,38 @@
 import { useEffect, useState } from 'react';
 import { useActions } from '../../hooks/useActions';
-import { useGetCommentsQuery } from '../../store/posts/posts.api';
-import Button from '../Button/Button';
+import { useGetRepliesQuery } from '../../store/posts/posts.api';
+
 import GradientText from '../GradientText/GradientText';
+import Reply from '../Reply/Reply';
 import styles from './Comment.module.css';
 
-const Comment = ({ comment, reply }) => {
+const Comment = ({ comment, root }) => {
   const [skip, setSkip] = useState(true);
   const { by: author, text, time, id, kids } = comment;
   const { putNewReplies } = useActions();
 
-  console.log(kids);
-  // const replyId = (kids.length !== 0 && kids.at(0)) || id;
-  const {
-    data: replies,
-    isError,
-    isLoading,
-    isFetching,
-  } = useGetCommentsQuery(id, { skip: skip });
+  useGetRepliesQuery(root, { skip: skip });
+  // console.log(kids);
+  // // const replyId = (kids.length !== 0 && kids.at(0)) || id;
+  const { data, isError, isLoading, isFetching } = useGetRepliesQuery(id, {
+    skip: skip,
+  });
+
+  const repliesLoaded = !isLoading && !isError && !isFetching;
 
   useEffect(() => {
     if (kids) {
       putNewReplies({
-        root: id,
-        kids: kids,
+        loadedParent: id,
+        replies: data,
       });
     }
-  }, [replies]);
+  }, [repliesLoaded, id, kids, data]);
 
   const date = new Date(time * 1000).toLocaleString();
 
   return (
-    <article
-      className={reply ? '' : 'commentwrap'}
-      onClick={() => setSkip((prev) => !prev)}
-    >
+    <article className="commentwrap" onClick={() => setSkip((prev) => !prev)}>
       <div className={styles.blackwrap}>
         <header className={styles.header}>
           <p>
@@ -48,17 +46,17 @@ const Comment = ({ comment, reply }) => {
           className={styles.comment}
           dangerouslySetInnerHTML={{ __html: text }}
         ></section>
-        {replies && (
+        {/* {replies && (
           <section className={styles.replies}>
             <h2>Replies:</h2>
             {replies.map(
               (reply) =>
                 reply !== null && (
-                  <Comment key={comment.time} comment={comment} reply />
+                  <Reply key={comment.time} comment={comment} root={id}/>
                 )
             )}
           </section>
-        )}
+        )} */}
       </div>
     </article>
   );

@@ -7,29 +7,30 @@ import { Link } from 'react-router-dom';
 import { useActions } from '../hooks/useActions';
 import { useEffect } from 'react';
 import Button from '../components/Button/Button';
+import { useSelector } from 'react-redux';
 
 const MINUTE = 60000;
 
 const Home = () => {
   const { putNewPosts } = useActions();
-
   const { isLoading, isFetching, isError, data, refetch } =
     useGetLatestPostsQuery('', { pollingInterval: MINUTE });
-
-  let posts = !isFetching && !isLoading && !isError && data;
-
-  posts = !isFetching && !isLoading && !isError && posts.filter((post) => post);
+  let postsLoaded = !isFetching && !isLoading && !isError;
   useEffect(() => {
-    putNewPosts(posts);
-  }, [posts]);
+    if (postsLoaded) {
+      putNewPosts(data);
+    }
+  }, [postsLoaded]);
+
+  const posts = useSelector((state) => state.views.posts);
+  console.log(posts);
 
   return (
     <>
-      {isError && 'Could not get data, try again later :('}
       <Header>
         <Button handler={refetch}>Refresh news</Button>
       </Header>
-      {!isFetching && !isLoading && !isError && data ? (
+      {postsLoaded ? (
         <>
           {
             <main className={styles.home}>

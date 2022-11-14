@@ -27,6 +27,7 @@
 
 .view {
   padding: 3rem;
+  overflow-y: hidden;
 }
 
 .link {

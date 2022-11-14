@@ -11,9 +11,12 @@ const MINUTE = 10000;
 
 const Home = () => {
   const { putNew } = useActions();
+
   const { isLoading, isFetching, isError, data, refetch } =
     useGetLatestPostsQuery('', { pollingInterval: MINUTE });
+
   let posts = !isFetching && !isLoading && !isError && data;
+
   posts = !isFetching && !isLoading && !isError && posts.filter((post) => post);
   useEffect(() => {
     putNew(posts);

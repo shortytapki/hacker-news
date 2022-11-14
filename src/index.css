@@ -31,7 +31,8 @@ a {
 }
 
 .wrap,
-.viewwrap {
+.viewwrap,
+.commentwrap {
   height: 100%;
   transition: all 0.3s ease;
   border-radius: 0.5rem;

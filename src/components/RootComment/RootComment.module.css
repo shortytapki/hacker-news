@@ -1,0 +1,12 @@
+.blackwrap {
+  background: #000;
+  border-radius: 0.4rem;
+}
+
+.header {
+  padding: 1rem 2rem 0;
+}
+.comment {
+  padding: 1rem 2rem;
+  font-size: 0.8rem;
+}

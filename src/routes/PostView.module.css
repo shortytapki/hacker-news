@@ -4,13 +4,14 @@
   height: auto;
   background-color: #000;
   border-radius: 0.4rem;
-  padding: 1rem 3rem;
+  padding: 3rem;
   color: #e5e5e5;
-  position: relative;
 }
 
 .header {
   margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 60%;
 }
 
 .title {
@@ -20,10 +21,7 @@
 
 .author {
   font-size: 2.4rem;
-  position: absolute;
-  right: 3rem;
   text-align: right;
-  bottom: 1rem;
   opacity: 0.8;
 }
 
@@ -34,7 +32,7 @@
 .link {
   position: relative;
   padding-bottom: 3px;
-  color: #e5e5e5;
+  color: #4361eeff;
   text-decoration: none;
   max-width: max-content;
   max-height: 1.5rem;
@@ -42,7 +40,7 @@
 }
 
 .link:hover {
-  color: #e5e5e5;
+  color: #4361eeff;
 }
 
 .link::before {
@@ -53,7 +51,7 @@
   height: 2px;
   bottom: 0;
   left: 0;
-  background: -webkit-linear-gradient(180deg, #4361eeff, #4895efff, #4cc9f0ff);
+  background: #4361eeff;
   transform: scaleX(0);
   transition: transform 0.3s ease;
 }
@@ -64,5 +62,8 @@
 
 .comments {
   height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
   margin: 3rem;
 }

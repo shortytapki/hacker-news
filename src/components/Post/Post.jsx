@@ -1,7 +1,7 @@
 import styles from './Post.module.css';
 
-const Post = ({ number, children }) => {
-  const { by, time, title, score } = children;
+const Post = ({ number, post }) => {
+  const { by, time, title, score } = post;
   const createdAt = new Date(time * 1000).toLocaleString().slice(0, 17);
   return (
     <div className="wrap">

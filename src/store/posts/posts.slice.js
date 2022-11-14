@@ -1,13 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = { posts: [] };
+const initialState = { posts: [], rootComments: [], replies: [] };
 
 const viewsSlice = createSlice({
   name: 'views',
   initialState,
   reducers: {
-    putNew(state, action) {
+    putNewPosts(state, action) {
       state.posts = action.payload;
+    },
+    putNewComments(state, action) {
+      state.rootComments = action.payload;
+    },
+    putNewReplies(state, action) {
+      state.replies.push(action.payload);
     },
   },
 });

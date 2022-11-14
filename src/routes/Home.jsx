@@ -8,10 +8,10 @@ import { useActions } from '../hooks/useActions';
 import { useEffect } from 'react';
 import Button from '../components/Button/Button';
 
-const MINUTE = 10000;
+const MINUTE = 60000;
 
 const Home = () => {
-  const { putNew } = useActions();
+  const { putNewPosts } = useActions();
 
   const { isLoading, isFetching, isError, data, refetch } =
     useGetLatestPostsQuery('', { pollingInterval: MINUTE });
@@ -20,11 +20,12 @@ const Home = () => {
 
   posts = !isFetching && !isLoading && !isError && posts.filter((post) => post);
   useEffect(() => {
-    putNew(posts);
+    putNewPosts(posts);
   }, [posts]);
 
   return (
     <>
+      {isError && 'Could not get data, try again later :('}
       <Header>
         <Button handler={refetch}>Refresh news</Button>
       </Header>
@@ -34,9 +35,7 @@ const Home = () => {
             <main className={styles.home}>
               {posts.map((post, idx) => (
                 <Link to={`post/${post.id}`} key={idx}>
-                  <Post key={post.id} number={idx + 1} onClick={() => {}}>
-                    {post}
-                  </Post>
+                  <Post key={post.id} number={idx + 1} post={post} />
                 </Link>
               ))}
             </main>

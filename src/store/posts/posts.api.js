@@ -3,21 +3,18 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const postsApi = createApi({
   reducerPath: 'api/latest',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://st-news-api.herokuapp.com',
+    baseUrl: 'https://st-news-api-production.up.railway.app/',
     mode: 'cors',
   }),
   endpoints: (build) => ({
     getLatestPosts: build.query({
-      query: () => 'api/latest',
+      query: () => '/api/latest',
     }),
+
     getComments: build.query({
-      query: (id) => `api/root/${id}`,
-    }),
-    getPost: build.query({
-      query: (id) => `api/post/${id}`,
+      query: (id) => `/api/root/${id}`,
     }),
   }),
 });
 
-export const { useGetLatestPostsQuery, useGetCommentsQuery, useGetPostQuery } =
-  postsApi;
+export const { useGetCommentsQuery, useGetLatestPostsQuery } = postsApi;

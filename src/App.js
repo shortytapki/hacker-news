@@ -12,7 +12,6 @@ function App() {
       <div className="app">
         <BrowserRouter>
           <Route exact path="/" component={Home} />
-
           <Route path="/post/:id" component={PostView} />
         </BrowserRouter>
       </div>

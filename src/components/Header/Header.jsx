@@ -1,4 +1,3 @@
-import Button from '../Button/Button';
 import GradientText from '../GradientText/GradientText';
 import styles from './Header.module.css';
 

@@ -2,24 +2,25 @@
   background: #000;
   border-radius: 0.4rem;
   transition: all 0.3s ease;
+  padding: 2rem;
 }
 
 .header {
-  padding: 1rem 2rem 0;
+  margin-bottom: 2rem;
 }
 .comment {
-  padding: 1rem 2rem;
+  /* padding: 1rem 2rem; */
   height: auto;
   font-size: 0.8rem;
   position: relative;
   transition: height 0.3s ease;
 }
 
-.comment:hover {
-  cursor: pointer;
-}
-
 .replies {
   max-width: 30rem;
   padding: 1rem 4rem;
+}
+
+.refresh h2 {
+  margin: 3.5rem 0 1.5rem;
 }

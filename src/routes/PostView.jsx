@@ -6,8 +6,9 @@ import GradientText from '../components/GradientText/GradientText';
 import { useGetKidsQuery } from '../store/posts/posts.api';
 import Comment from '../components/Comment/Comment';
 import Button from '../components/Button/Button';
-import { useEffect } from 'react';
+import Comments from '../components/Comments/Comments';
 import { useActions } from '../hooks/useActions';
+import { useEffect } from 'react';
 
 const PostView = () => {
   let history = useHistory();
@@ -15,33 +16,34 @@ const PostView = () => {
     history.push('/');
   };
   const { id } = useParams();
-  const { putRootComments, putToddlers } = useActions();
+
+  const { putRootComments } = useActions();
   const {
-    data,
-    isLoading: commentsAreLoading,
-    isFetching: commentsAreFetching,
-    isError: commentsLoadError,
+    data: rootCommentsData,
+    isLoading,
+    isFetching,
+    isSuccess,
     refetch,
-  } = useGetKidsQuery('8863');
-
-  const refresh = commentsAreFetching || commentsAreLoading;
-  const commentsLoaded =
-    !commentsAreFetching && !commentsAreLoading && !commentsLoadError;
-
+  } = useGetKidsQuery(id);
   useEffect(() => {
-    if (commentsLoaded) {
-      putRootComments(data);
-    }
-  }, [commentsLoaded]);
+    isSuccess && putRootComments(rootCommentsData);
+  }, [isSuccess]);
 
-  let firstLvlComments = useSelector((state) => state.views.rootComments);
+  const rootComments = useSelector((state) => state.views.rootComments);
+  const loading = isFetching || isLoading;
 
   const post = useSelector((state) => state.views.posts)
     .filter((data) => +id === data.id)
     .at(0);
-  const { url, title, time, by: author, kids } = post;
-  const noComments = !kids;
+  const { url, title, time, by: author, descendants } = post;
 
+  console.log(rootComments);
+
+  const counterMsg =
+    (descendants === 0 && `${descendants} comments... (-_-メ)`) ||
+    (descendants > 1
+      ? `${descendants} comments (~˘▾˘)~`
+      : '1 comment \\ (•◡•) /');
   return (
     <>
       <Header>
@@ -61,9 +63,6 @@ const PostView = () => {
                 >
                   Go to the original post
                 </a>
-                <div className={styles.refresh}>
-                  <Button handler={refetch}>Refresh comments</Button>
-                </div>
               </div>
               <aside className={styles.author}>
                 <p>
@@ -75,14 +74,14 @@ const PostView = () => {
                 </p>
               </aside>
             </header>
+            <div className={styles.refresh}>
+              <Button handler={refetch}>Refresh comments</Button>
+              {!loading && <span>{counterMsg}</span>}
+              {loading && <span>Loading... (づ￣ ³￣)づ</span>}
+            </div>
+
             <section className={styles.comments}>
-              <span>
-                {noComments && !refresh && 'No comments yet... (-_-メ)'}
-              </span>
-              <p>{refresh && 'Refreshing comments...'}</p>
-              {firstLvlComments.map((comment) => (
-                <Comment key={comment.time} comment={comment} kids={kids} />
-              ))}
+              {/* <Comments root={id} /> */}
             </section>
           </article>
         </div>

@@ -10,7 +10,7 @@ const viewsSlice = createSlice({
       state.posts = action.payload;
     },
     putRootComments(state, action) {
-      state.rootComments = action.payload;
+      if (action.payload.at(0) !== null) state.rootComments = action.payload;
     },
     putToddlers(state, action) {
       state.toddlers = action.payload;

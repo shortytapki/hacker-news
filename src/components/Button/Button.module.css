@@ -1,6 +1,7 @@
 .buttonwrap {
   min-height: 3rem;
   transition: all 0.3s ease;
+  max-width: fit-content;
   border-radius: 0.5rem;
   background: -webkit-linear-gradient(
     180deg,

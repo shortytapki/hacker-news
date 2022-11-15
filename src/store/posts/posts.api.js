@@ -2,7 +2,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const postsApi = createApi({
   reducerPath: 'api/latest',
-  refetchOnFocus: false,
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://st-news-api-production.up.railway.app/',
     mode: 'cors',
@@ -17,5 +16,4 @@ export const postsApi = createApi({
   }),
 });
 
-export const { useGetLatestPostsQuery, useGetKidsQuery } =
-  postsApi;
+export const { useGetLatestPostsQuery, useGetKidsQuery } = postsApi;

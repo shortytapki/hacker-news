@@ -13,14 +13,14 @@ const MINUTE = 60000;
 
 const Home = () => {
   const { putNewPosts } = useActions();
-  const { isLoading, isFetching, isError, data, refetch } =
-    useGetLatestPostsQuery('', { pollingInterval: MINUTE });
-  let postsLoaded = !isFetching && !isLoading && !isError;
+  const { isLoading, isFetching, data, isSuccess, refetch } =
+    useGetLatestPostsQuery('', {
+      pollingInterval: MINUTE,
+    });
+
   useEffect(() => {
-    if (postsLoaded) {
-      putNewPosts(data);
-    }
-  }, [postsLoaded]);
+    isSuccess && putNewPosts(data);
+  }, [isSuccess]);
 
   const posts = useSelector((state) => state.views.posts);
 
@@ -29,7 +29,7 @@ const Home = () => {
       <Header>
         <Button handler={refetch}>Refresh news</Button>
       </Header>
-      {postsLoaded ? (
+      {!isFetching && !isLoading ? (
         <>
           {
             <main className={styles.home}>

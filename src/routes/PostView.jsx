@@ -17,7 +17,7 @@ const PostView = () => {
   const { id } = useParams();
 
   const { putRootComments } = useActions();
-  const [loadReplies, setLoadReplies] = useState(false);
+  const [skip, setSkip] = useState(true);
   const [nestId, setNestId] = useState(undefined);
   const {
     data: rootCommentsData,
@@ -32,7 +32,7 @@ const PostView = () => {
   }, [loaded]);
 
   const rootComments = useSelector((state) => state.views.rootComments);
-  console.log(rootComments);
+
   const loading = isFetching || isLoading;
 
   const post = useSelector((state) => state.views.posts)
@@ -94,14 +94,20 @@ const PostView = () => {
               <section
                 onClick={() => {
                   subscribe(nestId);
-                  setLoadReplies(true);
+                  setSkip(false);
                 }}
               >
                 <Comment comment={comment} key={comment.time} />
                 {comment.kids !== null &&
                   comment.kids !== undefined &&
-                  loadReplies &&
-                  comment.kids.map((kid) => <Comment id={kid} key={kid} />)}
+                  comment.kids.map((kid) => (
+                    <Comment
+                      id={kid}
+                      key={kid}
+                      skip={skip}
+                      comment={undefined}
+                    />
+                  ))}
               </section>
             ))}
           </article>

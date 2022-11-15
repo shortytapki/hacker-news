@@ -10,9 +10,9 @@ export const postsApi = createApi({
     getLatestPosts: build.query({
       query: () => '/api/latest',
     }),
-    // getComment: build.query({
-    //   query: (id) => `api/${id}`,
-    // }),
+    getComment: build.query({
+      query: (id) => `api/comment/${id}`,
+    }),
     getKids: build.query({
       query: (root) => `/api/roots/${root}`,
     }),

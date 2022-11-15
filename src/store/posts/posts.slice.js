@@ -13,8 +13,7 @@ const viewsSlice = createSlice({
       if (action.payload.at(0) !== null) state.rootComments = action.payload;
     },
     putBody(state, action) {
-      if (action.payload.at(0) !== null && action.payload !== undefined)
-        state.nestedBody = action.payload;
+      if (action.payload !== null) state.nestedBody = action.payload;
     },
   },
 });

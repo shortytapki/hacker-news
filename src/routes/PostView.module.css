@@ -68,3 +68,8 @@
   gap: 2rem;
 }
 
+.refresh {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}

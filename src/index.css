@@ -51,10 +51,21 @@ a {
   );
   padding: 0.3rem;
 }
+.commentwrap {
+  margin-bottom: 2rem;
+}
+
+.wrap:hover,
+.commentwrap:hover {
+  cursor: pointer;
+}
 
 .wrap:hover {
   transform: scale(1.07);
-  cursor: pointer;
+}
+
+.commentwrap:hover {
+  transform: scale(0.98);
 }
 
 .wrap:active {

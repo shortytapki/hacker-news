@@ -16,10 +16,6 @@
   transition: height 0.3s ease;
 }
 
-.comment:hover {
-  cursor: pointer;
-}
-
 .replies {
   max-width: 30rem;
   padding: 1rem 4rem;

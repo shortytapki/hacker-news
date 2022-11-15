@@ -1,50 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useActions } from '../../hooks/useActions';
-import Button from '../Button/Button';
+import { useGetKidsQuery } from '../../store/posts/posts.api';
 import GradientText from '../GradientText/GradientText';
 import styles from './Comment.module.css';
-import { useGetKidsQuery } from '../../store/posts/posts.api';
 
-const Comment = ({ comment, parent }) => {
-  const { putToddlers } = useActions();
-
-  const [skip, setSkip] = useState(true);
-
-  const {
-    data,
-    isLoading: repliesAreLoading,
-    isFetching: repliesAreFetching,
-    isError: repliesLoadError,
-    isSuccess,
-  } = useGetKidsQuery(parent, { skip: skip });
-
-  console.log(data);
-
-  useEffect(() => {
-    isSuccess && putToddlers(data);
-  }, [isSuccess, skip]);
-
-  // const commentsLoaded =
-  //   !commentsAreFetching && !commentsAreLoading && !commentsLoadError;
+const Comment = ({ id, comment }) => {
+  // const { isLoading, isFetching, isSuccess, data } = useGetKidsQuery(id);
+  // const { putComments } = useActions();
   // useEffect(() => {
-  //   if (commentsLoaded && data) {
-  //     data.at(0) && putToddlers(data);
-  //   }
-  // }, [commentsLoaded]);
-
-  const toddlers = useSelector((state) => state.views.toddlers);
-  console.log(toddlers);
-
-  // const comments = rootComments.length && rootComments.at(0) !== null;
-  return (
-    <div
-      className="commentwrap"
-      onClick={() => {
-        setSkip(false);
-      }}
-    >
-      <div className={styles.blackwrap}>
+  //   !isLoading && !isFetching && isSuccess && putComments(data);
+  // }, [data]);
+  // const rootComments = useSelector((state) => state.views.rootComments);
+  let body;
+  if (comment !== undefined || comment !== null) {
+    body = (
+      <>
         <header className={styles.header}>
           <p>
             <GradientText>
@@ -57,12 +28,12 @@ const Comment = ({ comment, parent }) => {
           className={styles.comment}
           dangerouslySetInnerHTML={{ __html: comment.text }}
         ></section>
-        {toddlers.at(0) !== null &&
-          toddlers.map((tdl) => (
-            <Comment comment={comment} key={comment.time} parent={comment.id} />
-          ))}
-        {/* {!skip && <Comment comment={}/>} */}
-      </div>
+      </>
+    );
+  }
+  return (
+    <div className="commentwrap">
+      <div className={styles.blackwrap}>{body}</div>
     </div>
   );
 };

@@ -64,8 +64,8 @@ a {
   transform: scale(1.07);
 }
 
-.commentwrap:hover {
-  transform: scale(0.98);
+.commentwrap:hover.blackwrap:hover {
+  background-color: #333;
 }
 
 .wrap:active {

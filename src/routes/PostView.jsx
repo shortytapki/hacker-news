@@ -6,9 +6,8 @@ import GradientText from '../components/GradientText/GradientText';
 import { useGetKidsQuery } from '../store/posts/posts.api';
 import Comment from '../components/Comment/Comment';
 import Button from '../components/Button/Button';
-import Comments from '../components/Comments/Comments';
 import { useActions } from '../hooks/useActions';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const PostView = () => {
   let history = useHistory();
@@ -18,18 +17,22 @@ const PostView = () => {
   const { id } = useParams();
 
   const { putRootComments } = useActions();
+  const [loadReplies, setLoadReplies] = useState(false);
+  const [nestId, setNestId] = useState(undefined);
   const {
     data: rootCommentsData,
     isLoading,
     isFetching,
     isSuccess,
     refetch,
-  } = useGetKidsQuery(id);
+  } = useGetKidsQuery('8863');
+  const loaded = isSuccess && !isLoading && !isFetching;
   useEffect(() => {
-    isSuccess && putRootComments(rootCommentsData);
-  }, [isSuccess]);
+    loaded && putRootComments(rootCommentsData);
+  }, [loaded]);
 
   const rootComments = useSelector((state) => state.views.rootComments);
+  console.log(rootComments);
   const loading = isFetching || isLoading;
 
   const post = useSelector((state) => state.views.posts)
@@ -37,13 +40,21 @@ const PostView = () => {
     .at(0);
   const { url, title, time, by: author, descendants } = post;
 
-  console.log(rootComments);
+  const subscribe = (id) => setNestId(id);
+  let counterMsg;
+  if (descendants !== undefined && descendants !== null && descendants) {
+    counterMsg =
+      (descendants === 0 && `${descendants} comments... (-_-メ)`) ||
+      (descendants > 1 && `${descendants} comments (~˘▾˘)~`) ||
+      (descendants === 1 && '1 comment \\ (•◡•) /');
+  } else {
+    counterMsg =
+      (rootComments.length === 0 &&
+        `${rootComments.length} comments... (-_-メ)`) ||
+      (rootComments.length > 1 && `${rootComments.length} comments (~˘▾˘)~`) ||
+      (rootComments.length === 1 && '1 comment \\ (•◡•) /');
+  }
 
-  const counterMsg =
-    (descendants === 0 && `${descendants} comments... (-_-メ)`) ||
-    (descendants > 1
-      ? `${descendants} comments (~˘▾˘)~`
-      : '1 comment \\ (•◡•) /');
   return (
     <>
       <Header>
@@ -79,10 +90,20 @@ const PostView = () => {
               {!loading && <span>{counterMsg}</span>}
               {loading && <span>Loading... (づ￣ ³￣)づ</span>}
             </div>
-
-            <section className={styles.comments}>
-              {/* <Comments root={id} /> */}
-            </section>
+            {rootComments.map((comment) => (
+              <section
+                onClick={() => {
+                  subscribe(nestId);
+                  setLoadReplies(true);
+                }}
+              >
+                <Comment comment={comment} key={comment.time} />
+                {comment.kids !== null &&
+                  comment.kids !== undefined &&
+                  loadReplies &&
+                  comment.kids.map((kid) => <Comment id={kid} key={kid} />)}
+              </section>
+            ))}
           </article>
         </div>
       </div>

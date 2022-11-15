@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = { posts: [], rootComments: [], toddlers: [] };
+const initialState = { posts: [], rootComments: [], nestedBody: [] };
 
 const viewsSlice = createSlice({
   name: 'views',
@@ -12,8 +12,9 @@ const viewsSlice = createSlice({
     putRootComments(state, action) {
       if (action.payload.at(0) !== null) state.rootComments = action.payload;
     },
-    putToddlers(state, action) {
-      state.toddlers = action.payload;
+    putBody(state, action) {
+      if (action.payload.at(0) !== null && action.payload !== undefined)
+        state.nestedBody = action.payload;
     },
   },
 });

@@ -3,7 +3,7 @@ import Header from '../components/Header/Header';
 import { useSelector } from 'react-redux';
 import styles from './PostView.module.css';
 import GradientText from '../components/GradientText/GradientText';
-import { useGetCommentsQuery } from '../store/posts/posts.api';
+import { useGetKidsQuery } from '../store/posts/posts.api';
 import Comment from '../components/Comment/Comment';
 import Button from '../components/Button/Button';
 import { useEffect } from 'react';
@@ -15,14 +15,14 @@ const PostView = () => {
     history.push('/');
   };
   const { id } = useParams();
-  const { putNewComments } = useActions();
+  const { putRootComments, putToddlers } = useActions();
   const {
     data,
     isLoading: commentsAreLoading,
     isFetching: commentsAreFetching,
     isError: commentsLoadError,
     refetch,
-  } = useGetCommentsQuery('8863');
+  } = useGetKidsQuery('8863');
 
   const refresh = commentsAreFetching || commentsAreLoading;
   const commentsLoaded =
@@ -30,7 +30,7 @@ const PostView = () => {
 
   useEffect(() => {
     if (commentsLoaded) {
-      putNewComments(data);
+      putRootComments(data);
     }
   }, [commentsLoaded]);
 
@@ -80,12 +80,9 @@ const PostView = () => {
                 {noComments && !refresh && 'No comments yet... (-_-メ)'}
               </span>
               <p>{refresh && 'Refreshing comments...'}</p>
-              {firstLvlComments.map(
-                (comment) =>
-                  !comment.msg && (
-                    <Comment key={comment.time} comment={comment} />
-                  )
-              )}
+              {firstLvlComments.map((comment) => (
+                <Comment key={comment.time} comment={comment} kids={kids} />
+              ))}
             </section>
           </article>
         </div>

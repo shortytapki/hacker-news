@@ -11,18 +11,11 @@ export const postsApi = createApi({
     getLatestPosts: build.query({
       query: () => '/api/latest',
     }),
-
-    getComments: build.query({
-      query: (id) => `/api/root/${id}`,
-    }),
-    getReplies: build.query({
-      query: (id) => `/api/kids/${id}`,
+    getKids: build.query({
+      query: (root) => `/api/kids/${root}`,
     }),
   }),
 });
 
-export const {
-  useGetCommentsQuery,
-  useGetLatestPostsQuery,
-  useGetRepliesQuery,
-} = postsApi;
+export const { useGetLatestPostsQuery, useGetKidsQuery } =
+  postsApi;

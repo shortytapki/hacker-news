@@ -1,38 +1,43 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useActions } from '../../hooks/useActions';
-import { useGetRepliesQuery } from '../../store/posts/posts.api';
 
 import GradientText from '../GradientText/GradientText';
-import Reply from '../Reply/Reply';
 import styles from './Comment.module.css';
+import { useGetKidsQuery } from '../../store/posts/posts.api';
 
-const Comment = ({ comment, root }) => {
-  const [skip, setSkip] = useState(true);
+const Comment = ({ comment }) => {
   const { by: author, text, time, id, kids } = comment;
-  const { putNewReplies } = useActions();
+  const [skip, setSkip] = useState(true);
+  const { putToddlers } = useActions();
 
-  useGetRepliesQuery(root, { skip: skip });
-  // console.log(kids);
-  // // const replyId = (kids.length !== 0 && kids.at(0)) || id;
-  const { data, isError, isLoading, isFetching } = useGetRepliesQuery(id, {
-    skip: skip,
-  });
-
-  const repliesLoaded = !isLoading && !isError && !isFetching;
+  const {
+    data,
+    isLoading: commentsAreLoading,
+    isFetching: commentsAreFetching,
+    isError: commentsLoadError,
+    refetch,
+  } = useGetKidsQuery(id, { skip: skip });
+  const commentsLoaded =
+    !commentsAreFetching && !commentsAreLoading && !commentsLoadError;
 
   useEffect(() => {
-    if (kids) {
-      putNewReplies({
-        loadedParent: id,
-        replies: data,
-      });
+    if (commentsLoaded && data) {
+      data.at(0) && putToddlers(data);
     }
-  }, [repliesLoaded, id, kids, data]);
+  }, [commentsLoaded]);
 
+  const toddlers = useSelector((state) => state.views.toddlers);
+  console.log(toddlers);
   const date = new Date(time * 1000).toLocaleString();
 
   return (
-    <article className="commentwrap" onClick={() => setSkip((prev) => !prev)}>
+    <article
+      className="commentwrap"
+      onClick={() => {
+        setSkip((prev) => !prev);
+      }}
+    >
       <div className={styles.blackwrap}>
         <header className={styles.header}>
           <p>
@@ -46,17 +51,6 @@ const Comment = ({ comment, root }) => {
           className={styles.comment}
           dangerouslySetInnerHTML={{ __html: text }}
         ></section>
-        {/* {replies && (
-          <section className={styles.replies}>
-            <h2>Replies:</h2>
-            {replies.map(
-              (reply) =>
-                reply !== null && (
-                  <Reply key={comment.time} comment={comment} root={id}/>
-                )
-            )}
-          </section>
-        )} */}
       </div>
     </article>
   );

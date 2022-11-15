@@ -23,7 +23,6 @@ const Home = () => {
   }, [postsLoaded]);
 
   const posts = useSelector((state) => state.views.posts);
-  console.log(posts);
 
   return (
     <>

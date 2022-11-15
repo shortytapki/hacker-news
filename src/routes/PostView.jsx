@@ -16,9 +16,8 @@ const PostView = () => {
   };
   const { id } = useParams();
 
-  const { putRootComments } = useActions();
-  const [skip, setSkip] = useState(true);
-  const [nestId, setNestId] = useState(undefined);
+  const { putRootComments, loadReplies } = useActions();
+  const skip = useSelector((state) => state.views.loadReplies);
   const {
     data: rootCommentsData,
     isLoading,
@@ -40,7 +39,6 @@ const PostView = () => {
     .at(0);
   const { url, title, time, by: author, descendants } = post;
 
-  const subscribe = (id) => setNestId(id);
   let counterMsg;
   if (descendants !== undefined && descendants !== null && descendants) {
     counterMsg =
@@ -91,24 +89,21 @@ const PostView = () => {
               {loading && <span>Loading... (づ￣ ³￣)づ</span>}
             </div>
             {rootComments.map((comment) => (
-              <section
-                onClick={() => {
-                  subscribe(nestId);
-                  setSkip(false);
-                }}
-              >
-                <Comment comment={comment} key={comment.time} />
-                {comment.kids !== null &&
-                  comment.kids !== undefined &&
-                  comment.kids.map((kid) => (
+              <div className="commentwrap" key={comment.id}>
+                <div className={styles.blackwrap}>
+                  <section
+                    onClick={() => {
+                      loadReplies(true);
+                    }}
+                  >
                     <Comment
-                      id={kid}
-                      key={kid}
+                      comment={comment}
+                      replies={comment.kids}
                       skip={skip}
-                      comment={undefined}
                     />
-                  ))}
-              </section>
+                  </section>
+                </div>
+              </div>
             ))}
           </article>
         </div>

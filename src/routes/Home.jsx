@@ -19,7 +19,7 @@ const Home = () => {
     });
 
   useEffect(() => {
-     isSuccess && putNewPosts(data);
+    isSuccess && putNewPosts(data);
   }, [isSuccess]);
 
   const posts = useSelector((state) => state.views.posts);

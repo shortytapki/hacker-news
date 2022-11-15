@@ -19,5 +19,9 @@ export const postsApi = createApi({
   }),
 });
 
-export const { useGetLatestPostsQuery, useGetKidsQuery, useGetCommentQuery } =
-  postsApi;
+export const {
+  useGetLatestPostsQuery,
+  useGetKidsQuery,
+  useGetCommentQuery,
+  useLazyGetLatestPostsQuery,
+} = postsApi;

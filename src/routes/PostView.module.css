@@ -74,3 +74,10 @@
   gap: 3rem;
   margin-bottom: 2rem;
 }
+
+.blackwrap {
+  background: #000;
+  border-radius: 0.4rem;
+  transition: all 0.3s ease;
+  padding: 2rem;
+}

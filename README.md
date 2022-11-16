@@ -25,7 +25,7 @@ npm install --global yarn
 yarn install
 ```
 
-После установки для запуска выполним:
+После установки, для запуска выполним:
 
 ```
 yarn start

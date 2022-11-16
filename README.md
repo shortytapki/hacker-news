@@ -1,7 +1,8 @@
 # Hacker News
 **[Посетить адрес с выложенным проектом](https://avito-test-task-132wabrr1-shortytapki.vercel.app/)**
 
-**Для приложения реализовано собственное API, выложенное на [этом сервере](https://st-news-api-production.up.railway.app/), код можно найти [здесь](https://github.com/shortytapki/api).**
+Технические и продуктовые требования реализованны в полном объёме, из опциональных - добавлен внешний API.
+**[Сервер с API](https://st-news-api-production.up.railway.app/), код можно найти [здесь](https://github.com/shortytapki/api).**
 
 
 **Перед запуском приложения необходимо установить NodeJS!**
@@ -32,3 +33,4 @@ yarn install
 ```
 yarn start
 ```
+

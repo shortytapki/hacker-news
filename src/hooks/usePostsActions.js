@@ -4,7 +4,7 @@ import { postActions } from '../store/posts/posts.slice';
 
 const actions = { ...postActions };
 
-export const useActions = () => {
+export const usePostActions = () => {
   const dispatch = useDispatch();
   return bindActionCreators(actions, dispatch);
 };

@@ -4,7 +4,7 @@ import styles from './Home.module.css';
 import Loading from '../components/Loading/Loading';
 import { useGetLatestPostsQuery } from '../store/posts/posts.api';
 import { Link } from 'react-router-dom';
-import { useActions } from '../hooks/useActions';
+import { usePostActions } from '../hooks/usePostsActions';
 import { useEffect } from 'react';
 import Button from '../components/Button/Button';
 import { useSelector } from 'react-redux';
@@ -12,7 +12,8 @@ import { useSelector } from 'react-redux';
 const MINUTE = 60000;
 
 const Home = () => {
-  const { putNewPosts } = useActions();
+  const { putNewPosts } = usePostActions();
+
   const { isLoading, isFetching, data, isSuccess, refetch } =
     useGetLatestPostsQuery('', {
       pollingInterval: MINUTE,

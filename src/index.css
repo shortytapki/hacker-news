@@ -24,15 +24,41 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
+a,
+.link {
   text-decoration: none;
-  height: auto;
+}
+
+.link {
+  position: relative;
+  color: #4361eeff;
+}
+
+.link:hover {
+  color: #4361eeff;
+}
+
+.link::before {
+  content: '';
+  position: absolute;
   display: block;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background: #4361eeff;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.link:hover::before {
+  transform: scaleX(1);
 }
 
 .wrap,
 .viewwrap,
-.commentwrap {
+.commentwrap,
+.kidcommentwrap {
   height: 100%;
   transition: all 0.3s ease;
   border-radius: 0.5rem;
@@ -52,7 +78,7 @@ a {
   padding: 0.3rem;
 }
 .commentwrap {
-  margin-bottom: 2rem;
+  animation: showcomments 1s ease;
 }
 
 .wrap:hover,
@@ -74,4 +100,32 @@ a {
 
 .view {
   padding: 3rem;
+}
+
+.blackwrap {
+  background-color: #000;
+  height: 100%;
+  border-radius: 0.3rem;
+}
+
+.kidcommentwrap {
+  background-color: #000;
+  margin: 2rem;
+}
+
+.replies {
+  padding-left: 2rem;
+  font-size: 1rem;
+  color: #fff;
+}
+
+@keyframes showcomments {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }

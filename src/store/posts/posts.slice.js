@@ -2,9 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   posts: [],
-  rootComments: [],
-  reply: [],
-  loadReplies: false,
+  comments: [],
+  loadRepliesFor: [],
+  replies: [],
 };
 
 const viewsSlice = createSlice({
@@ -15,13 +15,15 @@ const viewsSlice = createSlice({
       state.posts = action.payload;
     },
     putRootComments(state, action) {
-      if (action.payload.at(0) !== null) state.rootComments = action.payload;
+      if (action.payload.at(0) !== null) state.comments = action.payload;
     },
     putReply(state, action) {
-      if (action.payload !== null) state.nestedBody = action.payload;
+      if (action.payload.commentData !== null)
+        state.replies.push(action.payload);
     },
-    loadReplies(state, action) {
-      state.loadReplies = action.payload;
+    loadReply(state, action) {
+      if (!state.loadRepliesFor.includes(action.payload))
+        state.loadRepliesFor.push(action.payload);
     },
   },
 });

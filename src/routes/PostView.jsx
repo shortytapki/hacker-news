@@ -6,18 +6,20 @@ import GradientText from '../components/GradientText/GradientText';
 import { useGetKidsQuery } from '../store/posts/posts.api';
 import Comment from '../components/Comment/Comment';
 import Button from '../components/Button/Button';
-import { useActions } from '../hooks/useActions';
-import { useEffect, useState } from 'react';
+import { usePostActions } from '../hooks/usePostsActions';
+import { useEffect } from 'react';
 
 const PostView = () => {
   let history = useHistory();
+
   const returnHandler = () => {
     history.push('/');
   };
+
   const { id } = useParams();
 
-  const { putRootComments, loadReplies } = useActions();
-  const skip = useSelector((state) => state.views.loadReplies);
+  const { putRootComments, loadReply } = usePostActions();
+
   const {
     data: rootCommentsData,
     isLoading,
@@ -25,21 +27,26 @@ const PostView = () => {
     isSuccess,
     refetch,
   } = useGetKidsQuery('8863');
+
   const loaded = isSuccess && !isLoading && !isFetching;
+
   useEffect(() => {
     loaded && putRootComments(rootCommentsData);
-  }, [loaded]);
+  }, [loaded, rootCommentsData, putRootComments]);
 
-  const rootComments = useSelector((state) => state.views.rootComments);
+  const rootComments = useSelector((state) => state.views.comments);
 
   const loading = isFetching || isLoading;
 
   const post = useSelector((state) => state.views.posts)
     .filter((data) => +id === data.id)
     .at(0);
+
   const { url, title, time, by: author, descendants } = post;
+  const loadRepliesFor = useSelector((state) => state.views.loadRepliesFor);
 
   let counterMsg;
+
   if (descendants !== undefined && descendants !== null && descendants) {
     counterMsg =
       (descendants === 0 && `${descendants} comments... (-_-メ)`) ||
@@ -66,7 +73,7 @@ const PostView = () => {
                 <h1 className={styles.title}>{title}</h1>
                 <a
                   href={url}
-                  className={styles.link}
+                  className="link"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -88,23 +95,43 @@ const PostView = () => {
               {!loading && <span>{counterMsg}</span>}
               {loading && <span>Loading... (づ￣ ³￣)づ</span>}
             </div>
-            {rootComments.map((comment) => (
-              <div className="commentwrap" key={comment.id}>
-                <div className={styles.blackwrap}>
-                  <section
-                    onClick={() => {
-                      loadReplies(true);
-                    }}
-                  >
-                    <Comment
-                      comment={comment}
-                      replies={comment.kids}
-                      skip={skip}
-                    />
-                  </section>
-                </div>
-              </div>
-            ))}
+            <section className={styles.comments}>
+              {rootComments.map((comment) => {
+                const skip = !loadRepliesFor.includes(comment.id);
+                return (
+                  <div className="commentwrap" key={comment.id}>
+                    <div className={styles.blackwrap}>
+                      <section
+                        onClick={() => {
+                          loadReply(comment.id);
+                        }}
+                      >
+                        <Comment
+                          parent
+                          commentData={comment}
+                          skip={skip}
+                          parentId={comment.id}
+                        />
+                        <section className={styles.comments}>
+                          {!skip &&
+                            comment.kids !== undefined &&
+                            comment.kids.map((kid) => {
+                              return (
+                                <Comment
+                                  parentId={comment.id}
+                                  kidId={kid}
+                                  skip={false}
+                                  key={kid}
+                                />
+                              );
+                            })}
+                        </section>
+                      </section>
+                    </div>
+                  </div>
+                );
+              })}
+            </section>
           </article>
         </div>
       </div>

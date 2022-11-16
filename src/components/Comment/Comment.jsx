@@ -1,41 +1,49 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useActions } from '../../hooks/useActions';
-import { useGetKidsQuery } from '../../store/posts/posts.api';
-import GradientText from '../GradientText/GradientText';
-import styles from './Comment.module.css';
+import { usePostActions } from '../../hooks/usePostsActions';
+import { useGetCommentQuery } from '../../store/posts/posts.api';
+import CommentBody from './CommentBody';
 
-const Comment = ({ id, comment }) => {
-  // const { isLoading, isFetching, isSuccess, data } = useGetKidsQuery(id);
-  // const { putComments } = useActions();
-  // useEffect(() => {
-  //   !isLoading && !isFetching && isSuccess && putComments(data);
-  // }, [data]);
-  // const rootComments = useSelector((state) => state.views.rootComments);
+const Comment = ({ commentData, parent, parentId, kidId, skip }) => {
+  const { isLoading, isFetching, isSuccess, data } = useGetCommentQuery(kidId, {
+    skip: skip,
+  });
+  const { putReply } = usePostActions();
+  const loaded = !isLoading && !isFetching && isSuccess;
+  useEffect(() => {
+    loaded &&
+      commentData !== null &&
+      putReply({
+        parentId: parentId,
+        kidId: kidId,
+        commentData: data,
+      });
+  }, [loaded]);
+
+  let replies = useSelector(
+    (state) =>
+      !parent && kidId !== undefined && kidId !== null && state.views.replies
+  );
+  replies = replies && replies.filter((rpl) => rpl.kidId === kidId);
+
   let body;
-  if (comment !== undefined || comment !== null) {
+
+  if (commentData !== null && commentData !== undefined && parent) {
     body = (
-      <>
-        <header className={styles.header}>
-          <p>
-            <GradientText>
-              {comment.by}
-              <br /> at {new Date(comment.time * 1000).toLocaleString()}
-            </GradientText>
-          </p>
-        </header>
-        <section
-          className={styles.comment}
-          dangerouslySetInnerHTML={{ __html: comment.text }}
-        ></section>
-      </>
+      <div className="blackwrap">
+        <CommentBody commentData={commentData} />
+      </div>
+    );
+  } else {
+    body = (
+      <div className="replies">
+        {replies &&
+          replies.map((rpl, idx) => (
+            <CommentBody commentData={rpl.commentData} key={idx} />
+          ))}
+      </div>
     );
   }
-  return (
-    <div className="commentwrap">
-      <div className={styles.blackwrap}>{body}</div>
-    </div>
-  );
+  return <>{body}</>;
 };
-
 export default Comment;

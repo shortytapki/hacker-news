@@ -1,4 +1,6 @@
-## Hacker News
+# Hacker News
+**[Посетить адрес с выложенным проектом](https://avito-test-task-132wabrr1-shortytapki.vercel.app/)**
+
 **Для приложения реализовано собственное API, выложенное на [этом сервере](https://st-news-api-production.up.railway.app/), код можно найти [здесь](https://github.com/shortytapki/api).**
 
 

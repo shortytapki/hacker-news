@@ -26,7 +26,7 @@ const PostView = () => {
     isFetching,
     isSuccess,
     refetch,
-  } = useGetKidsQuery('8863');
+  } = useGetKidsQuery(id);
 
   const loaded = isSuccess && !isLoading && !isFetching;
 

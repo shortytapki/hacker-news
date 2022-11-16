@@ -111,6 +111,7 @@ const PostView = () => {
                           commentData={comment}
                           skip={skip}
                           parentId={comment.id}
+                          replied={comment.kids !== undefined}
                         />
                         <section className={styles.comments}>
                           {!skip &&

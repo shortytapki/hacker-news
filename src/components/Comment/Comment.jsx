@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { usePostActions } from '../../hooks/usePostsActions';
 import { useGetCommentQuery } from '../../store/posts/posts.api';
+import GradientText from '../GradientText/GradientText';
 import CommentBody from './CommentBody';
 
-const Comment = ({ commentData, parent, parentId, kidId, skip }) => {
+const Comment = ({ commentData, parent, parentId, kidId, skip, replied }) => {
   const { isLoading, isFetching, isSuccess, data } = useGetCommentQuery(kidId, {
     skip: skip,
   });
@@ -31,6 +32,11 @@ const Comment = ({ commentData, parent, parentId, kidId, skip }) => {
   if (commentData !== null && commentData !== undefined && parent) {
     body = (
       <div className="blackwrap">
+        {replied && (
+          <div className="replynotif">
+            <GradientText>Click on comment to see the replies</GradientText>
+          </div>
+        )}
         <CommentBody commentData={commentData} />
       </div>
     );

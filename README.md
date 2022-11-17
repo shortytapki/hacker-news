@@ -1,5 +1,5 @@
 # Hacker News
-**[Посетить адрес с выложенным проектом](https://avito-test-task-pq5a2nqs7-shortytapki.vercel.app/)**
+**[Посетить адрес с выложенным проектом](https://avito-test-task-three.vercel.app/)**
 
 Технические и продуктовые требования реализованны в полном объёме, из опциональных - добавлен внешний API.
 **Сервер можно посетить по [ссылке](https://st-news-api-production.up.railway.app/), код можно найти [здесь](https://github.com/shortytapki/api).**

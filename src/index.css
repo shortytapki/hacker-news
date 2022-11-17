@@ -122,6 +122,13 @@ a,
   color: #fff;
 }
 
+@media screen and (max-width: 356px) {
+  .wrap {
+    font-size: 1rem;
+    max-width: 90vw;
+  }
+}
+
 @keyframes showcomments {
   from {
     transform: translateX(100%);

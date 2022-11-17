@@ -53,6 +53,13 @@
     padding: 4rem;
   }
 }
+
+@media screen and (max-width: 356px) {
+  .header {
+    font-size: 0.7rem;
+  }
+}
+
 /* @keyframes showHeader {
   from {
     transform: translateY(-100%);

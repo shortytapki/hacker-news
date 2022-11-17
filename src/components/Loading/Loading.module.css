@@ -1,6 +1,6 @@
 .container {
   position: absolute;
-  top: 20%;
+  top: 12%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -18,7 +18,16 @@
 }
 
 @media screen and (max-width: 922px) {
+  .container {
+    top: 15%;
+  }
   .msg {
     font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .container {
+    top: 20%;
   }
 }

@@ -40,3 +40,9 @@
     opacity: 1;
   }
 }
+
+@media screen and (max-width: 830px) {
+  .home {
+    grid-template-columns: 1fr;
+  }
+}

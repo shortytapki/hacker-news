@@ -34,7 +34,9 @@ const PostView = () => {
     loaded && putRootComments(rootCommentsData);
   }, [loaded, rootCommentsData, putRootComments]);
 
-  const rootComments = useSelector((state) => state.views.comments);
+  let rootComments = useSelector((state) => state.views.comments);
+  console.log(rootComments);
+  // if (loaded) rootComments = rootComments((comment) => comment.parent === id);
 
   const loading = isFetching || isLoading;
 

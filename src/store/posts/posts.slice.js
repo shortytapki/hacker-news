@@ -15,7 +15,9 @@ const viewsSlice = createSlice({
       state.posts = action.payload;
     },
     putRootComments(state, action) {
-      if (action.payload.at(0) !== null) state.comments = action.payload;
+      if (action.payload.at(0) !== null) {
+        state.comments = action.payload;
+      }
     },
     putReply(state, action) {
       if (action.payload.commentData !== null)

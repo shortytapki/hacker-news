@@ -1,6 +1,7 @@
 import GradientText from '../GradientText/GradientText';
 import styles from './Comment.module.css';
 const CommentBody = ({ commentData }) => {
+  if (commentData.deleted) return <p>Reply was deleted...</p>;
   return (
     <>
       <header className={styles.header}>

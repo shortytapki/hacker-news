@@ -29,7 +29,13 @@ const Comment = ({ commentData, parent, parentId, kidId, skip, replied }) => {
 
   let body;
 
-  if (commentData.deleted) return <p>Comment was deleted</p>;
+  if (
+    (commentData === null ||
+      commentData === undefined ||
+      commentData.deleted) &&
+    parent
+  )
+    return <p>Comment was deleted</p>;
   if (commentData !== null && commentData !== undefined && parent) {
     body = (
       <div className="blackwrap">

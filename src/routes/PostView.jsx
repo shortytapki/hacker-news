@@ -35,7 +35,6 @@ const PostView = () => {
   }, [loaded, rootCommentsData, putRootComments]);
 
   let rootComments = useSelector((state) => state.views.comments);
-  console.log(rootComments);
   // if (loaded) rootComments = rootComments((comment) => comment.parent === id);
 
   const loading = isFetching || isLoading;
@@ -44,7 +43,7 @@ const PostView = () => {
     .filter((data) => +id === data.id)
     .at(0);
 
-  const { url, title, time, by: author, descendants } = post;
+  const { url, title, time, by: author, descendants, deleted } = post;
   const loadRepliesFor = useSelector((state) => state.views.loadRepliesFor);
 
   let counterMsg;
@@ -62,6 +61,7 @@ const PostView = () => {
       (rootComments.length === 1 && '1 comment \\ (•◡•) /');
   }
 
+  if (deleted) return <p>Post was deleted...</p>;
   return (
     <>
       <Header>

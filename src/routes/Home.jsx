@@ -34,11 +34,14 @@ const Home = () => {
         <>
           {
             <main className={styles.home}>
-              {posts.map((post, idx) => (
-                <Link to={`post/${post.id}`} key={idx}>
-                  <Post key={post.id} number={idx + 1} post={post} />
-                </Link>
-              ))}
+              {posts.map(
+                (post, idx) =>
+                  post !== null && (
+                    <Link to={`post/${post.id}`} key={idx}>
+                      <Post key={post.id} number={idx + 1} post={post} />
+                    </Link>
+                  )
+              )}
             </main>
           }
         </>

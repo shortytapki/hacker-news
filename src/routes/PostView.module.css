@@ -49,3 +49,14 @@
   transition: all 0.3s ease;
   padding: 2rem;
 }
+
+@media screen and (max-width: 706px) {
+  .header {
+    grid-template-columns: 1fr;
+  }
+
+  .author {
+    text-align: left;
+    font-size: 1.6rem;
+  }
+}

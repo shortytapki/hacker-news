@@ -21,18 +21,3 @@
     font-size: 2rem;
   }
 }
-
-@media screen and (max-width: 620px) {
-  .container {
-    top: 30%;
-  }
-}
-
-/* @media screen and (max-width: 356px) {
-  .container {
-    top: 30%;
-  }
-  .msg {
-    font-size: 1.6rem;
-  }
-} */

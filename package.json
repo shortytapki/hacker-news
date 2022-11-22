@@ -1,7 +1,6 @@
 {
   "name": "news",
   "version": "0.1.0",
-  "homepage": "https://shortytapki.github.io/avito-test-task/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.0",
